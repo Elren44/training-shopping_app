@@ -2,6 +2,14 @@
 import {useContext, useState} from "react";
 import {ThemeColor, ThemeContext} from "../providers/context";
 
+export type Color = {
+		background: string,
+		text: string,
+		primary: string,
+		border: string,
+		card: string
+}
+
 const Colors = {
 	light: {
 		background: '#f5f5f5',
