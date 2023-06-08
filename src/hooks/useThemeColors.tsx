@@ -7,7 +7,9 @@ export type Color = {
 		text: string,
 		primary: string,
 		border: string,
-		card: string
+		card: string,
+		bgOp: string,
+		accent: string
 }
 
 const Colors = {
@@ -16,16 +18,18 @@ const Colors = {
 		text: '#191919',
 		primary: '#191919',
 		border: '#D9D9D9',
-		card: "#f5f5f5",
-		bgOp: '#00000059'
+		card: "#fff",
+		bgOp: '#00000059',
+		accent: "#3b82f6"
 	},
 	dark: {
 		background: "#191919",
 		text: "#f5f5f5",
 		primary: '#f5f5f5',
 		border: '#D9D9D9',
-		card: "#242424",
-		bgOp: '#00000059'
+		card: "#000",
+		bgOp: '#00000059',
+		accent: "#90b0e3"
 	},
 }
 

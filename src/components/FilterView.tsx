@@ -6,17 +6,18 @@ import {sleeves} from "../data/sleeeves";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {ScrollView} from 'react-native-gesture-handler';
 import Icons from "@expo/vector-icons/MaterialIcons";
+import PriceRangeSelector from "./PriceRangeSelector";
 
 const MAX_PRICE = 500
 
 const FilterView: FC = () => {
-	const [minPrice, setMinPrice] = useState(50)
-	const [maxPrice, setMaxPrice] = useState(250);
+	const [startPrice, setStartPrice] = useState(50)
+	const [endPrice, setEndPrice] = useState(250);
 	const {colors} = useThemeColors()
 	const insets = useSafeAreaInsets();
 	const styles = getStyles(colors)
 	return (
-		<View style={{flex: 1, paddingHorizontal: 24}}>
+		<View style={{flex: 1}}>
 			<ScrollView
 				scrollEnabled={true}
 				showsVerticalScrollIndicator={false}
@@ -28,27 +29,14 @@ const FilterView: FC = () => {
 					</View>
 
 					{/*	Price Selector*/}
-					<View>
-						<View style={{marginBottom: 24}}>
-							<Text>Price Range</Text>
-						</View>
-						<View style={styles.priceSliderWrapper}>
-							<View style={[styles.priceSlider, {
-								left: `${(100 * minPrice) / MAX_PRICE}%`,
-								width: `${(100 * (maxPrice - minPrice)) / MAX_PRICE}%`
-							}]}/>
-							<View style={{...styles.priceHandle, left: "10%",}}>
-								<View style={styles.priceHandleDot}/>
-							</View>
-							<View style={{...styles.priceHandle, left: "50%",}}>
-								<View style={styles.priceHandleDot}/>
-							</View>
-						</View>
-						<View style={styles.priceMinMax}>
-							<Text style={{color: colors.text, opacity: 0.5}}>$0</Text>
-							<Text style={{color: colors.text, opacity: 0.5}}>${MAX_PRICE}</Text>
-						</View>
-					</View>
+					<PriceRangeSelector
+						minPrice={0}
+						maxPrice={MAX_PRICE}
+						startPrice={startPrice}
+						endPrice={endPrice}
+						onStartPriceChange={setStartPrice}
+						onEndPriceChange={setEndPrice}
+					/>
 
 					{/*	Sports Category*/}
 					<View style={styles.sports}>
@@ -121,61 +109,22 @@ const getStyles = (colors: any) => {
 		StyleSheet.create({
 			filter: {
 				padding: 24, gap: 24, flex: 1,
-				flexGrow: 1
+				flexGrow: 1,
 			},
 			filterHeader: {
 				flexDirection: "row",
 				alignItems: "center",
+				paddingHorizontal: 24
 			},
 			filterHeaderTitle: {
 				flex: 1,
 				fontSize: 20,
 				fontWeight: "700"
 			},
-			price: {},
-			priceSliderWrapper: {
-				height: 1,
-				width: "100%",
-				position: "relative",
-				backgroundColor: colors.border
+
+			sports: {
+				paddingHorizontal: 24
 			},
-			priceMinMax: {
-				flexDirection: "row",
-				alignItems: "center",
-				justifyContent: "space-between",
-				marginTop: 12
-			},
-			priceSlider: {
-				position: "absolute",
-				height: "100%",
-				backgroundColor: colors.primary
-			},
-			priceHandle: {
-				position: "absolute",
-				height: 24,
-				aspectRatio: 1,
-				alignItems: "center",
-				justifyContent: "center",
-				borderRadius: 100,
-				borderWidth: 2,
-				borderColor: colors.primary,
-				backgroundColor: colors.background,
-				transform: [
-					{
-						translateY: -12
-					},
-					{
-						translateX: -12
-					}
-				]
-			},
-			priceHandleDot: {
-				width: 3,
-				height: 3,
-				borderRadius: 10,
-				backgroundColor: colors.primary
-			},
-			sports: {},
 			sportsTitle: {
 				fontSize: 16,
 				fontWeight: "600",

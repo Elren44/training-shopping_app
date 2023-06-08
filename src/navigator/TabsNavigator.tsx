@@ -6,6 +6,7 @@ import useThemeColors from "../hooks/useThemeColors";
 import {CompositeScreenProps} from "@react-navigation/native";
 import {RootStackScreenProps} from "./RootNavigator";
 import {View} from "react-native";
+import CustomBottomTabs from "../components/CustomBottomTabs";
 
 export type TabsStackParamsList = {
     Home: undefined,
@@ -24,7 +25,10 @@ const TabsNavigator = () => {
     const {colors} = useThemeColors()
 
     return (
-        <TabsStack.Navigator  screenOptions={{tabBarShowLabel: false, tabBarStyle: {backgroundColor: colors.background}, tabBarActiveTintColor: colors.text }}>
+        <TabsStack.Navigator
+            screenOptions={{tabBarShowLabel: false, tabBarStyle: {backgroundColor: colors.background}, tabBarActiveTintColor: colors.text }}
+            tabBar={(props) => <CustomBottomTabs {...props} />}
+        >
             <TabsStack.Screen name={"Home"} component={HomeScreen}
                 options={{
                     headerShown: false,
@@ -33,6 +37,7 @@ const TabsNavigator = () => {
                     },
 
                 }}
+
             />
             <TabsStack.Screen name={"Cart"}   component={Example}
                 options={{

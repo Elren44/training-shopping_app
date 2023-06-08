@@ -19,7 +19,7 @@
       "supportsTablet": true
     },
     "android": {
-      "userInterfaceStyle": "dark",
+      "userInterfaceStyle": "light",
       "package": "com.shopping-app",
       "versionCode": 1,
       "adaptiveIcon": {
