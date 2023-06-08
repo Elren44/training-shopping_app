@@ -16,14 +16,16 @@ const Colors = {
 		text: '#191919',
 		primary: '#191919',
 		border: '#D9D9D9',
-		card: "#fff"
+		card: "#f5f5f5",
+		bgOp: '#00000059'
 	},
 	dark: {
 		background: "#191919",
 		text: "#f5f5f5",
 		primary: '#f5f5f5',
 		border: '#D9D9D9',
-		card: "#191919"
+		card: "#242424",
+		bgOp: '#00000059'
 	},
 }
 

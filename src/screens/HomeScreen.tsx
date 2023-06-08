@@ -9,6 +9,8 @@ import FilterView from "../components/FilterView";
 import useThemeColors from "../hooks/useThemeColors";
 import {ThemeColor} from "../providers/context";
 import {masonryItems} from "../data/masonryList";
+import {TabsStackScreenProps} from "../navigator/TabsNavigator";
+import {rgbaColor} from "react-native-reanimated/lib/types/lib";
 
 const CATEGORIES = [
 	'Clothing',
@@ -23,7 +25,7 @@ const CATEGORIES = [
 const AVATAR_URL =
 	'https://images.unsplash.com/photo-1583692331507-fc0bd348695d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbiUyMGZhY2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80';
 
-const HomeScreen: FC = () => {
+const HomeScreen = ({navigation}: TabsStackScreenProps<"Home">) => {
 	// const { colors } = useTheme();
 	const {colors, mode, setMode} = useThemeColors()
 	const [categoryIndex, setCategoryIndex] = useState(0);
@@ -103,7 +105,13 @@ const HomeScreen: FC = () => {
 					</View>
 					<View style={{flexDirection: 'row', gap: 12, height: 200}}>
 						{/* Card */}
-						<Card image={() =>
+						<Card price={100}
+						      onPress={() => {
+								  navigation.navigate("Details", {
+									  id: "123"
+								  })
+						      }}
+						      image={() =>
 							<Image
 								source={require("../assets/images/image-1.jpg")}
 								resizeMode='cover'
@@ -112,8 +120,14 @@ const HomeScreen: FC = () => {
 								}}
 							/>
 						}/>
-						<View style={{flex: 1, gap: 12}}>
-							<Card image={() => <Image
+						<View  style={{flex: 1, gap: 12}}>
+							<Card price={240}
+							      onPress={() => {
+								      navigation.navigate("Details", {
+									      id: "254"
+								      })
+							      }}
+							      image={() => <Image
 								source={require("../assets/images/image-2.jpg")}
 								resizeMode='cover'
 								style={{
@@ -121,7 +135,13 @@ const HomeScreen: FC = () => {
 								}}
 							/>
 							}/>
-							<Card image={() => <Image
+							<Card price={399}
+							      onPress={() => {
+								      navigation.navigate("Details", {
+									      id: "412"
+								      })
+							      }}
+							      image={() => <Image
 								source={require("../assets/images/image-3.jpg")}
 								resizeMode='cover'
 								style={{
@@ -185,14 +205,16 @@ const HomeScreen: FC = () => {
 								{item.Image()}
 								<View style={[StyleSheet.absoluteFill, {padding: 12}]}>
 									<View style={{flexDirection: 'row', gap: 8, padding: 4}}>
-										<Text
+										<View style={{padding: 10, overflow: "hidden", backgroundColor: String(colors.bgOp), borderRadius: 25, flex: 1, flexDirection: "row"}}>
+											<Text
 											style={{
 												...styles.masonryItemText,
-												color: colors.text,
+												color: colors.background,
 											}}
 										>
 											PUMA Everyday Hussle
 										</Text>
+										</View>
 										<View
 											style={[
 												styles.masonryItemFavorite,
@@ -357,9 +379,10 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Card = ({image}: { image: () => ReactNode }) => {
+const Card = ({price, onPress, image}: { price:number, onPress?: () => void, image: () => ReactNode }) => {
 	return (
 		<TouchableOpacity
+			onPress={onPress}
 			style={{
 				flex: 1,
 				position: 'relative',
@@ -380,7 +403,7 @@ const Card = ({image}: { image: () => ReactNode }) => {
 				}}
 			>
 				<Text style={{fontSize: 14, fontWeight: '600', color: '#fff'}}>
-					$130
+					${price}
 				</Text>
 			</View>
 		</TouchableOpacity>
